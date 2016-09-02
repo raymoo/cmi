@@ -13,7 +13,8 @@ as many interfaces as there are mob frameworks. CMI is a mod that provides the
 
 Usage
 =====
-Usage documentation is provided as LDoc comments in the source files.
+Usage documentation is provided as LDoc comments in the source files. To get
+nicely-formatted docs, you can run ldoc on init.lua.
 
 Implementing in your mob mod/framework
 ======================================
