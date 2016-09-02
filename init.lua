@@ -346,12 +346,12 @@ function cmi.serialize_components(component_data)
 	return minetest.write_json(serial_table)
 end
 
---- Implementation: health
+--- Implementation: health.
 -- Functions related to health that are needed for implementation of the
 -- interface. Only necessary if you are implementing the interface.
 -- @section impl_damage
 
---- Calculate damage
+--- Calculate damage.
 -- Use this function when you want to calculate the "default" damage. If you
 -- are a modder who wants to switch out the damage mechanism, do not replace
 -- this function. Replace #{damage_calculator} instead.
