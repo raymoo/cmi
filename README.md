@@ -9,9 +9,7 @@ implicitly they also all provide their own API for "using" mobs: things like
 checking if an entity is a mob or doing things on mob death. This is bad because
 modders who want to interface with mobs created by other modders need to code to
 as many interfaces as there are mob frameworks. CMI is a mod that provides the
-"one true mob interface", and is designed to be extensible to prevent bloat and
-to be easy to integrate into existing mob frameworks or implement in a
-stand-alone mob.
+"one true mob interface". It is designed to be extensible and easy to integrate.
 
 Usage
 =====
