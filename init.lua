@@ -45,6 +45,7 @@ cmi = {}
 
 --- Activation callbacks.
 -- @tparam ObjectRef mob the mob being activated
+-- @number dtime the time since the mob was unloaded
 -- @function ActivationCallback
 
 --- Step callbacks.
@@ -257,6 +258,8 @@ cmi.set_mob_component = on_entity("set_mob_component", function(mob, c_name, new
 	mob.cmi_components.components[c_name] = new
 end)
 
+--- Unique Ids
+
 --- Implementation: event notification.
 -- Functions used to notify CMI when things happen to your mob. Only necessary
 -- when you are implementing the interface.
@@ -286,6 +289,7 @@ cmi.notify_die = make_notifier(die_callbacks)
 --- Notify CMI that your mob has been activated.
 -- Call this after all other mob initialization.
 -- @tparam ObjectRef mob the mob being activated
+-- @number dtime the time since the mob was unloaded
 -- @function notify_activate
 cmi.notify_activate = make_notifier(activate_callbacks)
 
@@ -308,6 +312,7 @@ cmi.notify_step = make_notifier(step_callbacks)
 -- its luaentity.
 -- @tparam ?string serialized_data the serialized form of the string, if
 -- available. If the mob has never had component data, do not pass this argument.
+-- @return component data
 function cmi.activate_components(serialized)
 	local serial_table = serialized and minetest.parse_json(serialized) or {}
 
@@ -332,6 +337,7 @@ end
 -- where it can be retrieved on activation to be passed to
 -- #{activate_components}.
 -- @param component_data
+-- @treturn string
 function cmi.serialize_components(component_data)
 	local serial_table = component_data.old_serialization
 	local components = component_data.components
@@ -361,6 +367,7 @@ end
 -- @tparam table tool_capabilities
 -- @tparam ?vector direction
 -- @tparam ?Id attacker
+-- @treturn number
 function cmi.calculate_damage(...)
 	return cmi.damage_calculator(...)
 end
