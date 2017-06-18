@@ -146,7 +146,7 @@ end
 -- @treturn bool true if the object is a mob, otherwise returns a falsey value
 -- @function is_mob
 cmi.is_mob = on_entity("is_mob", function(ent)
-	return ent.cmi_is_mob
+	return ent._cmi_is_mob
 end)
 
 --- Gets a player-readable mob name.
@@ -173,7 +173,7 @@ end)
 --- Attack a mob.
 -- Functions like the punch method of ObjectRef, but takes an additional optional
 -- argument for an indirect attacker. Also works on non-mob entities that define
--- an appropriate cmi_attack method.
+-- an appropriate _cmi_attack method.
 -- @tparam ObjectRef|luaentity mob
 -- @tparam ObjectRef puncher
 -- @number time_from_last_punch
@@ -186,7 +186,7 @@ local function attack_ent(mob, puncher, time_from_last_punch, tool_capabilities,
 	direction, attacker)
 
 	-- It's a method in the mob but I don't want to index it twice
-	local atk = mob.cmi_attack
+	local atk = mob._cmi_attack
 	if not atk then mob.object:punch(puncher, time_from_last_punch,
 				tool_capabilities, direction)
 	else
@@ -248,7 +248,7 @@ component_defs, cmi.register_component = make_callback_table()
 -- @return The requested component, or nil if it doesn't exist
 -- @function get_mob_component
 cmi.get_mob_component = on_entity("get_mob_component", function(mob, c_name)
-	return mob.cmi_components.components[c_name]
+	return mob._cmi_components.components[c_name]
 end)
 
 --- Set a component in a mob.
@@ -257,7 +257,7 @@ end)
 -- @param new_value
 -- @function set_mob_component
 cmi.set_mob_component = on_entity("set_mob_component", function(mob, c_name, new)
-	mob.cmi_components.components[c_name] = new
+	mob._cmi_components.components[c_name] = new
 end)
 
 --- Unique Ids.
@@ -359,7 +359,7 @@ cmi.notify_step = make_notifier(step_callbacks)
 -- @section impl_components
 
 --- Activates component data.
--- On mob activation, call this and put the result in the cmi_components field of
+-- On mob activation, call this and put the result in the _cmi_components field of
 -- its luaentity.
 -- @tparam ?string serialized_data the serialized form of the string, if
 -- available. If the mob has never had component data, do not pass this argument.

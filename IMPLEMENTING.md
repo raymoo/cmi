@@ -7,10 +7,10 @@ CMI requires mobs to add some fields to their luaentities.
 
 Required
 --------
-#### cmi_is_mob
+#### _cmi_is_mob
 This must be a single boolean field set to `true` at all times.
 
-#### cmi_components
+#### _cmi_components
 This must contain active component data. See the components section.
 
 Optional
@@ -20,7 +20,7 @@ If implemented, this must be  a string field with a player-readable mob name,
 like "chicken" or "zombie". If absent, CMI will use the part of the entity name
 after the colon.
 
-#### cmi_attack
+#### _cmi_attack
 If implemented, this must be a method like punch, except taking another parameter
 for an Attacker (see the usage documentation). Note that since this is a method
 of the luaentity and not of the ObjectRef, the first argument will be a
@@ -68,12 +68,12 @@ Deserialization
 ---------------
 In your mob's on_activate, you must call activate_components (see the usage
 documentation) on serialized data (see below) if available, or else with no
-arguments. Put the result in your mob's luaentity's cmi_components field.
+arguments. Put the result in your mob's luaentity's _cmi_components field.
 
 Serialization
 -------------
 In your mob's get_staticdata, you must call serialize_components (see the usage
-documentation) on your mob's luaentity's cmi_components field, and store the
+documentation) on your mob's luaentity's _cmi_components field, and store the
 result somewhere where it can be retrieved the next time the mob is activated.
 
 Other
