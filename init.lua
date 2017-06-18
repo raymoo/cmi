@@ -265,8 +265,18 @@ end)
 -- as a component, so you can use it as an example.
 -- @section uids
 
+local function show_hex(str)
+	local len = #str
+	local results = {}
+	for i = 1, len do
+		table.insert(results, string.format("%x", str:byte(i)))
+	end
+
+	return table.concat(results)
+end
+
 -- This is an ID that will be (probabilistically) unique to this session.
-local session_id = SecureRandom() and SecureRandom():next_bytes(16)
+local session_id = SecureRandom() and show_hex(SecureRandom():next_bytes(16))
 
 -- Fallback to math.rand with a warning
 if not session_id then
@@ -284,7 +294,7 @@ end
 local counter = 0
 local function generate_id()
 	counter = counter + 1
-	return session_id .. ";" .. counter
+	return session_id .. "-" .. counter
 end
 
 cmi.register_component({
